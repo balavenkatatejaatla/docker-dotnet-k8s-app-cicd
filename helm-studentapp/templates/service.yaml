@@ -1,0 +1,31 @@
+#apiVersion: v1
+#kind: Service
+#metadata:
+#name: studentapp-service
+#  namespace: {{ .Values.namespace }}
+#spec:
+#  selector:
+#    app: studentapp
+#  ports:
+#    - protocol: TCP
+#      port: {{ .Values.service.port }}
+#      targetPort: {{ .Values.service.targetPort }}
+#  type: ClusterIP
+
+
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: studentapp-service
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: studentapp
+  ports:
+  - protocol: TCP
+    port: {{ .Values.service.port }}
+    targetPort: {{ .Values.service.targetPort }}
+  type: {{ .Values.service.type }}
+

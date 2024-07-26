@@ -1,0 +1,14 @@
+---
+- name: Deploy Helm Chart
+  hosts: localhost
+  become: yes
+  vars:
+    helm_chart_path: "../helm-studentapp/" # Path to the Helm chart
+    release_name: "studentapp"
+    namespace: "studentapp-dev"
+    image_repository: "testacrk8s.azurecr.io/dotnet-student-app"
+    image_tag: "v1"
+    kubeconfig_path: "~/.kube/config"
+  roles:
+    - helm_deploy
+

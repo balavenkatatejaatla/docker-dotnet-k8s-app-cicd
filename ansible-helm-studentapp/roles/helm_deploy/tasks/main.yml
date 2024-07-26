@@ -1,0 +1,15 @@
+---
+- name: Ensure Helm is installed
+  command: "snap install helm --classic"
+  become: yes
+
+- name: Deploy Helm Chart
+  command: >
+    helm upgrade --install {{ release_name }} {{ helm_chart_path }}
+    -f {{ values_file }}
+    --set image.repository={{ image_repository }}
+    --set image.tag={{ image_tag }}
+    --kubeconfig {{ kubeconfig_path }}
+  environment:
+    HELM_EXPERIMENTAL_OCI: 1
+

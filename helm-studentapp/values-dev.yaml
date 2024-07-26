@@ -1,0 +1,20 @@
+namespace: studentapp-dev
+service:
+  port: 80
+  targetPort: 8080
+  type: ClusterIP
+replicaCount: 3
+image:
+  repository: testacrk8s.azurecr.io/dotnet-student-app
+  tag: latest
+containerPort: 5000
+imagePullSecrets:
+  name: acr-secret
+path: /dotnet(/|$)(.*)
+pathType: ImplementationSpecific
+service:
+  port: 80
+hpa:
+  minReplicas: 1
+  maxReplicas: 5
+  cpuUtilization: 50
